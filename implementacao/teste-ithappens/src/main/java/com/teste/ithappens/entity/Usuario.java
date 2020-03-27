@@ -5,13 +5,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = "CPF", name = "CPF_UK"))
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
 	private String nome;
