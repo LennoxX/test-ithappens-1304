@@ -17,60 +17,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.ithappens.dto.Response;
-import com.teste.ithappens.entity.Usuario;
-import com.teste.ithappens.service.UsuarioService;
+import com.teste.ithappens.entity.Produto;
+import com.teste.ithappens.service.ProdutoService;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/produto")
 @CrossOrigin("*")
-public class UsuarioResource {
+public class ProdutoResource {
 
 	@Autowired
-	private UsuarioService service;
+	private ProdutoService service;
 
 	@PostMapping
-	public ResponseEntity<Response<Usuario>> create(@RequestBody Usuario usuario) {
-		Response<Usuario> response = new Response<>();
-		response.setData(service.create(usuario));
+	public ResponseEntity<Response<Produto>> create(@RequestBody Produto produto) {
+		Response<Produto> response = new Response<>();
+		response.setData(service.create(produto));
 		return ResponseEntity.ok().body(response);
 
 	}
 
 	@PutMapping
-	public ResponseEntity<Response<Usuario>> update(@RequestBody Usuario usuario) {
-		Response<Usuario> response = new Response<>();
-		response.setData(service.update(usuario));
+	public ResponseEntity<Response<Produto>> update(@RequestBody Produto produto) {
+		Response<Produto> response = new Response<>();
+		response.setData(service.update(produto));
 		return ResponseEntity.ok().body(response);
 
 	}
 
 	@GetMapping(value = "{page}/{count}")
-	public ResponseEntity<Response<Page<Usuario>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
-		Response<Page<Usuario>> response = new Response<>();
+	public ResponseEntity<Response<Page<Produto>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
+		Response<Page<Produto>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
-		Page<Usuario> usuarios = service.findAllByPage(pageable);
-		response.setData(usuarios);
+		Page<Produto> produtos = service.findAllByPage(pageable);
+		response.setData(produtos);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping
-	public ResponseEntity<Response<List<Usuario>>> findAll() {
-		Response<List<Usuario>> response = new Response<>();
-		List<Usuario> usuarios = service.findAll();
-		response.setData(usuarios);
+	public ResponseEntity<Response<List<Produto>>> findAll() {
+		Response<List<Produto>> response = new Response<>();
+		List<Produto> produtos = service.findAll();
+		response.setData(produtos);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Response<Usuario>> findById(@PathVariable Long id) {
-		Response<Usuario> response = new Response<>();
+	public ResponseEntity<Response<Produto>> findById(@PathVariable Long id) {
+		Response<Produto> response = new Response<>();
 		response.setData(service.findById(id));
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("parameter/{parameter}")
-	public ResponseEntity<Response<List<Usuario>>> findByParameter(@PathVariable String parameter) {
-		Response<List<Usuario>> response = new Response<>();
+	public ResponseEntity<Response<List<Produto>>> findByParameter(@PathVariable String parameter) {
+		Response<List<Produto>> response = new Response<>();
 		response.setData(service.findByParameter(parameter));
 		return ResponseEntity.ok(response);
 	}

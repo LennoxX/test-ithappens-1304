@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,8 @@ import com.teste.ithappens.enums.TpStatusItemPedido;
 public class ItemPedido {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_item_pedido")
+	@SequenceGenerator(name = "seq_item_pedido", allocationSize = 1, sequenceName = "seq_item_pedido")
 	private Long id;
 
 	@ManyToOne

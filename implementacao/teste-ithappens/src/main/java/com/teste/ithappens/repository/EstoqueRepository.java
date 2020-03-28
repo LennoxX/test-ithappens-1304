@@ -6,4 +6,6 @@ import com.teste.ithappens.entity.Estoque;
 
 public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
 
+	Estoque findByFilial_id(Long filialId);
+
 }

@@ -17,60 +17,60 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.ithappens.dto.Response;
-import com.teste.ithappens.entity.Usuario;
-import com.teste.ithappens.service.UsuarioService;
+import com.teste.ithappens.entity.Cliente;
+import com.teste.ithappens.service.ClienteService;
 
 @RestController
-@RequestMapping("/api/usuario")
+@RequestMapping("/api/cliente")
 @CrossOrigin("*")
-public class UsuarioResource {
+public class ClienteResource {
 
 	@Autowired
-	private UsuarioService service;
+	private ClienteService service;
 
 	@PostMapping
-	public ResponseEntity<Response<Usuario>> create(@RequestBody Usuario usuario) {
-		Response<Usuario> response = new Response<>();
-		response.setData(service.create(usuario));
+	public ResponseEntity<Response<Cliente>> create(@RequestBody Cliente cliente) {
+		Response<Cliente> response = new Response<>();
+		response.setData(service.create(cliente));
 		return ResponseEntity.ok().body(response);
 
 	}
 
 	@PutMapping
-	public ResponseEntity<Response<Usuario>> update(@RequestBody Usuario usuario) {
-		Response<Usuario> response = new Response<>();
-		response.setData(service.update(usuario));
+	public ResponseEntity<Response<Cliente>> update(@RequestBody Cliente cliente) {
+		Response<Cliente> response = new Response<>();
+		response.setData(service.update(cliente));
 		return ResponseEntity.ok().body(response);
 
 	}
 
 	@GetMapping(value = "{page}/{count}")
-	public ResponseEntity<Response<Page<Usuario>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
-		Response<Page<Usuario>> response = new Response<>();
+	public ResponseEntity<Response<Page<Cliente>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
+		Response<Page<Cliente>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
-		Page<Usuario> usuarios = service.findAllByPage(pageable);
-		response.setData(usuarios);
+		Page<Cliente> clientes = service.findAllByPage(pageable);
+		response.setData(clientes);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping
-	public ResponseEntity<Response<List<Usuario>>> findAll() {
-		Response<List<Usuario>> response = new Response<>();
-		List<Usuario> usuarios = service.findAll();
-		response.setData(usuarios);
+	public ResponseEntity<Response<List<Cliente>>> findAll() {
+		Response<List<Cliente>> response = new Response<>();
+		List<Cliente> clientes = service.findAll();
+		response.setData(clientes);
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Response<Usuario>> findById(@PathVariable Long id) {
-		Response<Usuario> response = new Response<>();
+	public ResponseEntity<Response<Cliente>> findById(@PathVariable Long id) {
+		Response<Cliente> response = new Response<>();
 		response.setData(service.findById(id));
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("parameter/{parameter}")
-	public ResponseEntity<Response<List<Usuario>>> findByParameter(@PathVariable String parameter) {
-		Response<List<Usuario>> response = new Response<>();
+	public ResponseEntity<Response<List<Cliente>>> findByParameter(@PathVariable String parameter) {
+		Response<List<Cliente>> response = new Response<>();
 		response.setData(service.findByParameter(parameter));
 		return ResponseEntity.ok(response);
 	}

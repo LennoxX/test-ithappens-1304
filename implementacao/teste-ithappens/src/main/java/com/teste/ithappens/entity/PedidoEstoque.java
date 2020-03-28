@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.teste.ithappens.enums.TpFormaPagamento;
@@ -21,7 +22,8 @@ import com.teste.ithappens.enums.TpTipoPedido;
 public class PedidoEstoque {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pedido_estoque")
+	@SequenceGenerator(name = "seq_pedido_estoque", allocationSize = 1, sequenceName = "seq_pedido_estoque")
 	private Long id;
 
 	@Enumerated(EnumType.STRING)

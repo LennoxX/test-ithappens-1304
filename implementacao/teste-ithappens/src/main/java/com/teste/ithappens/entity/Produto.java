@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -11,7 +12,8 @@ import javax.persistence.Table;
 public class Produto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produto")
+	@SequenceGenerator(name = "seq_produto", allocationSize = 1, sequenceName = "seq_produto")
 	private Long id;
 	
 	private String nome;
