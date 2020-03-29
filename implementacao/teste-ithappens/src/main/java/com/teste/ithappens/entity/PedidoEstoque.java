@@ -1,7 +1,9 @@
 package com.teste.ithappens.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.teste.ithappens.enums.TpFormaPagamento;
 import com.teste.ithappens.enums.TpTipoPedido;
 
@@ -50,6 +54,10 @@ public class PedidoEstoque {
 	private BigDecimal valorTotal;
 
 	private Long totalItens;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedidoEstoque")
+	@JsonManagedReference
+	private List<ItemPedido> itens;
 
 	public Long getId() {
 		return id;
@@ -121,6 +129,14 @@ public class PedidoEstoque {
 
 	public void setTotalItens(Long totalItens) {
 		this.totalItens = totalItens;
+	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
 	}
 
 }

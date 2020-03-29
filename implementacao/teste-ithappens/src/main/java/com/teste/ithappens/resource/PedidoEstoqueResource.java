@@ -1,7 +1,5 @@
 package com.teste.ithappens.resource;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.ithappens.dto.Response;
+import com.teste.ithappens.entity.ItemPedido;
 import com.teste.ithappens.entity.PedidoEstoque;
 import com.teste.ithappens.service.PedidoEstoqueService;
 
@@ -29,6 +28,14 @@ public class PedidoEstoqueResource {
 	public ResponseEntity<Response<PedidoEstoque>> create(@RequestBody PedidoEstoque pedidoEstoque) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.create(pedidoEstoque));
+		return ResponseEntity.ok().body(response);
+
+	}
+	
+	@PostMapping("{idPedidoEstoque}/adicionar-item")
+	public ResponseEntity<Response<PedidoEstoque>> addItem(@PathVariable Long idPedidoEstoque, @RequestBody ItemPedido itemPedido) {
+		Response<PedidoEstoque> response = new Response<>();
+		response.setData(service.addItem(itemPedido, idPedidoEstoque));
 		return ResponseEntity.ok().body(response);
 
 	}

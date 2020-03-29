@@ -8,4 +8,6 @@ public interface EstoqueRepository extends JpaRepository<Estoque, Long> {
 
 	Estoque findByFilial_id(Long filialId);
 
+	Estoque findByProdutoIdAndFilialId(Long id, Long id2);
+
 }

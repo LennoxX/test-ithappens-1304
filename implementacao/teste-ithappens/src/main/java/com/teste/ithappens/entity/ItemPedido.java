@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.teste.ithappens.enums.TpStatusItemPedido;
 
 @Entity
@@ -29,6 +30,7 @@ public class ItemPedido {
 	@ManyToOne
 	@JoinColumn(name = "pedido_estoque_id")
 	@NotNull(message = "ATENÇÃO! CAMPO pedidoEstoque É OBRIGATÓRIO")
+	@JsonBackReference
 	private PedidoEstoque pedidoEstoque;
 
 	@ManyToOne
