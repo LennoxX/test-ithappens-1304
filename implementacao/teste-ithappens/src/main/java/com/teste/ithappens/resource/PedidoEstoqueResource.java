@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.teste.ithappens.dto.Response;
 import com.teste.ithappens.entity.ItemPedido;
 import com.teste.ithappens.entity.PedidoEstoque;
+import com.teste.ithappens.enums.TpFormaPagamento;
 import com.teste.ithappens.service.PedidoEstoqueService;
 
 @RestController
@@ -36,6 +37,22 @@ public class PedidoEstoqueResource {
 	public ResponseEntity<Response<PedidoEstoque>> addItem(@PathVariable Long idPedidoEstoque, @RequestBody ItemPedido itemPedido) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.addItem(itemPedido, idPedidoEstoque));
+		return ResponseEntity.ok().body(response);
+
+	}
+	
+	@PostMapping("remover-item/{idItemPedido}")
+	public ResponseEntity<Response<PedidoEstoque>> removeItem(@PathVariable Long idItemPedido) {
+		Response<PedidoEstoque> response = new Response<>();
+		response.setData(service.removeItem(idItemPedido));
+		return ResponseEntity.ok().body(response);
+
+	}
+	
+	@PostMapping("{idPedidoEstoque}/processar")
+	public ResponseEntity<Response<PedidoEstoque>> processar(@PathVariable Long idPedidoEstoque, @RequestBody TpFormaPagamento tpFormaPagamento) {
+		Response<PedidoEstoque> response = new Response<>();
+		response.setData(service.processar(idPedidoEstoque, tpFormaPagamento));
 		return ResponseEntity.ok().body(response);
 
 	}

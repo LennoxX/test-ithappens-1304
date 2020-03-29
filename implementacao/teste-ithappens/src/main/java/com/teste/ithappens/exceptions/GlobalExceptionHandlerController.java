@@ -10,12 +10,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.teste.ithappens.dto.Response;
 
 @RestControllerAdvice
@@ -35,7 +33,7 @@ public class GlobalExceptionHandlerController {
 		LOG.error("ERRO: " + msg);
 		response.getErrors().add(msg);
 		return ResponseEntity.status(e.getHttpStatus()).body(response);
-	}
+	}	
 
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<Response<?>> handleIllegalArgumentException(IllegalArgumentException e) throws IOException {

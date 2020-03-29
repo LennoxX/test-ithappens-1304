@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.teste.ithappens.enums.TpFormaPagamento;
@@ -34,6 +35,7 @@ public class PedidoEstoque {
 	private TpFormaPagamento tpFormaPagamento;
 
 	@Enumerated(EnumType.STRING)
+	@NotNull(message = "É NECESSÁRIO INFORMAR O TIPO DE PEDIDO: 'SAIDA' OU 'ENTRADA'")
 	private TpTipoPedido tpTipoPedido;
 
 	@ManyToOne
