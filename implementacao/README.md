@@ -10,3 +10,4 @@
 - no diretório implementação/
 - executar o comando: docker-compose up --build -d
 
+## MAIS INFORMAÇÕES PODEM SER ENCONTRADAS NA DOCUMENTAÇÃO
