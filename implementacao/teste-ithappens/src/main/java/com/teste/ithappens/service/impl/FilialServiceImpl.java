@@ -50,14 +50,4 @@ public class FilialServiceImpl implements FilialService {
 		return repository.findAll();
 	}
 
-	@Override
-	public Filial findByCodigo(Long codigo) {
-		Optional<Filial> filial = repository.findByCodigo(codigo);
-		if (filial.isPresent())
-			return filial.get();
-		else {
-			throw new CustomException("Filial não encontrada", HttpStatus.BAD_REQUEST);
-		}
-	}
-
 }

@@ -15,8 +15,6 @@ public interface FilialService {
 
 	Filial findById(Long id);
 
-	Filial findByCodigo(Long codigo);
-
 	Page<Filial> findAllByPage(Pageable page);
 
 	List<Filial> findAll();

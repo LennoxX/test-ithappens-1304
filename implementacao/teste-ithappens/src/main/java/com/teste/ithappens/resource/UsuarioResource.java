@@ -20,6 +20,8 @@ import com.teste.ithappens.dto.Response;
 import com.teste.ithappens.entity.Usuario;
 import com.teste.ithappens.service.UsuarioService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/usuario")
 @CrossOrigin("*")
@@ -29,6 +31,7 @@ public class UsuarioResource {
 	private UsuarioService service;
 
 	@PostMapping
+	@ApiOperation(value = "CREATE - Criar um novo usuário")
 	public ResponseEntity<Response<Usuario>> create(@RequestBody Usuario usuario) {
 		Response<Usuario> response = new Response<>();
 		response.setData(service.create(usuario));
@@ -37,6 +40,7 @@ public class UsuarioResource {
 	}
 
 	@PutMapping
+	@ApiOperation(value = "UPDATE - Atualiza um usuário existente")
 	public ResponseEntity<Response<Usuario>> update(@RequestBody Usuario usuario) {
 		Response<Usuario> response = new Response<>();
 		response.setData(service.update(usuario));
@@ -45,6 +49,7 @@ public class UsuarioResource {
 	}
 
 	@GetMapping(value = "{page}/{count}")
+	@ApiOperation(value = "FIND ALL BY PAGE - Recupera informações dos usuários cadastrados de forma paginada, informando uma página e uma quantidade de registros por página")
 	public ResponseEntity<Response<Page<Usuario>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
 		Response<Page<Usuario>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
@@ -54,6 +59,7 @@ public class UsuarioResource {
 	}
 
 	@GetMapping
+	@ApiOperation(value = "FIND ALL - Recupera informações dos usuários cadastrados")
 	public ResponseEntity<Response<List<Usuario>>> findAll() {
 		Response<List<Usuario>> response = new Response<>();
 		List<Usuario> usuarios = service.findAll();
@@ -62,6 +68,7 @@ public class UsuarioResource {
 	}
 
 	@GetMapping("{id}")
+	@ApiOperation(value = "FIND BY ID - Recupera informações de um usuário em específico através de seu ID")
 	public ResponseEntity<Response<Usuario>> findById(@PathVariable Long id) {
 		Response<Usuario> response = new Response<>();
 		response.setData(service.findById(id));
@@ -69,6 +76,7 @@ public class UsuarioResource {
 	}
 
 	@GetMapping("parameter/{parameter}")
+	@ApiOperation(value = "FIND BY PARAMETER - Recupera informações dos usuários cadastrados através de um parâmetro (nome, cpf...)")
 	public ResponseEntity<Response<List<Usuario>>> findByParameter(@PathVariable String parameter) {
 		Response<List<Usuario>> response = new Response<>();
 		response.setData(service.findByParameter(parameter));

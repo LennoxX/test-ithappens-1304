@@ -17,6 +17,8 @@ import com.teste.ithappens.entity.PedidoEstoque;
 import com.teste.ithappens.enums.TpFormaPagamento;
 import com.teste.ithappens.service.PedidoEstoqueService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/pedidoEstoque")
 @CrossOrigin("*")
@@ -26,6 +28,7 @@ public class PedidoEstoqueResource {
 	private PedidoEstoqueService service;
 
 	@PostMapping
+	@ApiOperation(value = "CREATE - Criar um novo PedidoEstoque")
 	public ResponseEntity<Response<PedidoEstoque>> create(@RequestBody PedidoEstoque pedidoEstoque) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.create(pedidoEstoque));
@@ -34,6 +37,7 @@ public class PedidoEstoqueResource {
 	}
 	
 	@PostMapping("{idPedidoEstoque}/adicionar-item")
+	@ApiOperation(value = "ADD ITEM - Adiciona um ItemPedido a um PedidoEstoque existente")
 	public ResponseEntity<Response<PedidoEstoque>> addItem(@PathVariable Long idPedidoEstoque, @RequestBody ItemPedido itemPedido) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.addItem(itemPedido, idPedidoEstoque));
@@ -42,6 +46,7 @@ public class PedidoEstoqueResource {
 	}
 	
 	@PostMapping("remover-item/{idItemPedido}")
+	@ApiOperation(value = "REMOVER ITEM - Remove um ItemPedido de um PedidoEstoque existente")
 	public ResponseEntity<Response<PedidoEstoque>> removeItem(@PathVariable Long idItemPedido) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.removeItem(idItemPedido));
@@ -50,6 +55,7 @@ public class PedidoEstoqueResource {
 	}
 	
 	@PostMapping("{idPedidoEstoque}/processar")
+	@ApiOperation(value = "PROCESSAR - Processa um PedidoEstoque informando a forma de pagamento. Responsável por atualizar os estoques dos produtos")
 	public ResponseEntity<Response<PedidoEstoque>> processar(@PathVariable Long idPedidoEstoque, @RequestBody TpFormaPagamento tpFormaPagamento) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.processar(idPedidoEstoque, tpFormaPagamento));
@@ -58,6 +64,7 @@ public class PedidoEstoqueResource {
 	}
 
 	@PutMapping
+	@ApiOperation(value = "UPDATE - Atualiza um PedidoEstoque existente")
 	public ResponseEntity<Response<PedidoEstoque>> update(@RequestBody PedidoEstoque pedidoEstoque) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.update(pedidoEstoque));
@@ -66,6 +73,7 @@ public class PedidoEstoqueResource {
 	}
 
 	@GetMapping("{id}")
+	@ApiOperation(value = "FIND BY ID - Recupera informações de um PedidoEstoque em específico através de seu ID")
 	public ResponseEntity<Response<PedidoEstoque>> findById(@PathVariable Long id) {
 		Response<PedidoEstoque> response = new Response<>();
 		response.setData(service.findById(id));

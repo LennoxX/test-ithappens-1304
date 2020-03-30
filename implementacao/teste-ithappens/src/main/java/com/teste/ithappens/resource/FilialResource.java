@@ -20,6 +20,8 @@ import com.teste.ithappens.dto.Response;
 import com.teste.ithappens.entity.Filial;
 import com.teste.ithappens.service.FilialService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/filial")
 @CrossOrigin("*")
@@ -29,6 +31,7 @@ public class FilialResource {
 	private FilialService service;
 
 	@PostMapping
+	@ApiOperation(value = "CREATE - Criar uma nova filial")
 	public ResponseEntity<Response<Filial>> create(@RequestBody Filial filial) {
 		Response<Filial> response = new Response<>();
 		response.setData(service.create(filial));
@@ -37,6 +40,7 @@ public class FilialResource {
 	}
 
 	@PutMapping
+	@ApiOperation(value = "UPDATE - Atualiza uma filial existente")
 	public ResponseEntity<Response<Filial>> update(@RequestBody Filial filial) {
 		Response<Filial> response = new Response<>();
 		response.setData(service.update(filial));
@@ -45,6 +49,7 @@ public class FilialResource {
 	}
 
 	@GetMapping(value = "{page}/{count}")
+	@ApiOperation(value = "FIND ALL BY PAGE - Recupera informações das filiais cadastradas de forma paginada, informando uma página e uma quantidade de registros por página")
 	public ResponseEntity<Response<Page<Filial>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
 		Response<Page<Filial>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
@@ -54,6 +59,7 @@ public class FilialResource {
 	}
 
 	@GetMapping
+	@ApiOperation(value = "FIND ALL - Recupera informações das filiais cadastrados")
 	public ResponseEntity<Response<List<Filial>>> findAll() {
 		Response<List<Filial>> response = new Response<>();
 		List<Filial> filials = service.findAll();
@@ -61,10 +67,11 @@ public class FilialResource {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("{codigo}")
-	public ResponseEntity<Response<Filial>> findByCodigo(@PathVariable Long codigo) {
+	@GetMapping("{id}")
+	@ApiOperation(value = "FIND BY ID - Recupera informações de um estoque em específico através de seu ID")
+	public ResponseEntity<Response<Filial>> findById(@PathVariable Long id) {
 		Response<Filial> response = new Response<>();
-		response.setData(service.findByCodigo(codigo));
+		response.setData(service.findById(id));
 		return ResponseEntity.ok(response);
 	}
 

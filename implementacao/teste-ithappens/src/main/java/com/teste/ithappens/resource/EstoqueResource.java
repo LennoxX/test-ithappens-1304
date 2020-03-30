@@ -20,6 +20,8 @@ import com.teste.ithappens.dto.Response;
 import com.teste.ithappens.entity.Estoque;
 import com.teste.ithappens.service.EstoqueService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/estoque")
 @CrossOrigin("*")
@@ -29,6 +31,7 @@ public class EstoqueResource {
 	private EstoqueService service;
 
 	@PostMapping
+	@ApiOperation(value = "CREATE - Criar um novo estoque")
 	public ResponseEntity<Response<Estoque>> create(@RequestBody Estoque estoque) {
 		Response<Estoque> response = new Response<>();
 		response.setData(service.create(estoque));
@@ -37,6 +40,7 @@ public class EstoqueResource {
 	}
 
 	@PutMapping
+	@ApiOperation(value = "UPDATE - Atualiza um estoque existente")
 	public ResponseEntity<Response<Estoque>> update(@RequestBody Estoque estoque) {
 		Response<Estoque> response = new Response<>();
 		response.setData(service.update(estoque));
@@ -45,6 +49,7 @@ public class EstoqueResource {
 	}
 
 	@GetMapping(value = "{page}/{count}")
+	@ApiOperation(value = "FIND ALL BY PAGE - Recupera informações dos estoques cadastrados de forma paginada, informando uma página e uma quantidade de registros por página")
 	public ResponseEntity<Response<Page<Estoque>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
 		Response<Page<Estoque>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
@@ -54,6 +59,7 @@ public class EstoqueResource {
 	}
 
 	@GetMapping
+	@ApiOperation(value = "FIND ALL - Recupera informações dos estoques cadastrados")
 	public ResponseEntity<Response<List<Estoque>>> findAll() {
 		Response<List<Estoque>> response = new Response<>();
 		List<Estoque> estoques = service.findAll();
@@ -62,6 +68,7 @@ public class EstoqueResource {
 	}
 
 	@GetMapping("{id}")
+	@ApiOperation(value = "FIND BY ID - Recupera informações de um estoque em específico através de seu ID")
 	public ResponseEntity<Response<Estoque>> findById(@PathVariable Long id) {
 		Response<Estoque> response = new Response<>();
 		response.setData(service.findById(id));
@@ -69,6 +76,7 @@ public class EstoqueResource {
 	}
 
 	@GetMapping("filial/{id}")
+	@ApiOperation(value = "FIND BY FILIAL - Recupera informações de um estoque através do ID de uma filial")
 	public ResponseEntity<Response<Estoque>> findByFilial(@PathVariable Long id) {
 		Response<Estoque> response = new Response<>();
 		response.setData(service.findByFilialId(id));

@@ -20,6 +20,8 @@ import com.teste.ithappens.dto.Response;
 import com.teste.ithappens.entity.Cliente;
 import com.teste.ithappens.service.ClienteService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/cliente")
 @CrossOrigin("*")
@@ -29,6 +31,7 @@ public class ClienteResource {
 	private ClienteService service;
 
 	@PostMapping
+	@ApiOperation(value = "CREATE - Criar um novo cliente")
 	public ResponseEntity<Response<Cliente>> create(@RequestBody Cliente cliente) {
 		Response<Cliente> response = new Response<>();
 		response.setData(service.create(cliente));
@@ -37,6 +40,7 @@ public class ClienteResource {
 	}
 
 	@PutMapping
+	@ApiOperation(value = "UPDATE - Atualiza um cliente existente")
 	public ResponseEntity<Response<Cliente>> update(@RequestBody Cliente cliente) {
 		Response<Cliente> response = new Response<>();
 		response.setData(service.update(cliente));
@@ -45,6 +49,7 @@ public class ClienteResource {
 	}
 
 	@GetMapping(value = "{page}/{count}")
+	@ApiOperation(value = "FIND ALL BY PAGE - Recupera informações dos clientes cadastrados de forma paginada, informando uma página e uma quantidade de registros por página")
 	public ResponseEntity<Response<Page<Cliente>>> findAllByPage(@PathVariable int page, @PathVariable int count) {
 		Response<Page<Cliente>> response = new Response<>();
 		Pageable pageable = PageRequest.of(page, count);
@@ -54,6 +59,7 @@ public class ClienteResource {
 	}
 
 	@GetMapping
+	@ApiOperation(value = "FIND ALL - Recupera informações dos clientes cadastrados")
 	public ResponseEntity<Response<List<Cliente>>> findAll() {
 		Response<List<Cliente>> response = new Response<>();
 		List<Cliente> clientes = service.findAll();
@@ -62,6 +68,7 @@ public class ClienteResource {
 	}
 
 	@GetMapping("{id}")
+	@ApiOperation(value = "FIND BY ID - Recupera informações de um cliente em específico através de seu ID")
 	public ResponseEntity<Response<Cliente>> findById(@PathVariable Long id) {
 		Response<Cliente> response = new Response<>();
 		response.setData(service.findById(id));
@@ -69,6 +76,7 @@ public class ClienteResource {
 	}
 
 	@GetMapping("parameter/{parameter}")
+	@ApiOperation(value = "FIND BY PARAMETER - Recupera informações dos clientes cadastrados através de um parâmetro (nome, cpf...)")
 	public ResponseEntity<Response<List<Cliente>>> findByParameter(@PathVariable String parameter) {
 		Response<List<Cliente>> response = new Response<>();
 		response.setData(service.findByParameter(parameter));
