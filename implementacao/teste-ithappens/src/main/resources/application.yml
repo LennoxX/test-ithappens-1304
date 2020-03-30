@@ -5,19 +5,14 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
-    show-sql: false
+    show-sql: true
     
   datasource:
-    #url: jdbc:postgresql://localhost:5432/ithappens
-    #username: postgres
-    #password: postgres
-    #driver-class-name: org.postgresql.Driver
   
-    url: jdbc:h2:file:~/h2db
+    url: jdbc:h2:file:~/h2db/ithappens
     username: admin
     password: admin
     driver-class-name: org.h2.Driver
-    #initialization-mode: always
     
   jackson:
     serialization:

@@ -59,6 +59,7 @@ public class GlobalExceptionHandlerController {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Response<?>> handleException(Exception e) throws IOException {
 		Response<?> response = new Response<>();
+		e.printStackTrace();
 		LOG.error("ERROR: " + e);
 		response.getErrors().add(e.getLocalizedMessage());
 		return ResponseEntity.badRequest().body(response);

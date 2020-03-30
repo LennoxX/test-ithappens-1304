@@ -33,11 +33,13 @@ public class PedidoEstoqueServiceImpl implements PedidoEstoqueService {
 
 	@Override
 	public PedidoEstoque create(PedidoEstoque pedidoEstoque) {
+		pedidoEstoque.setTotalItens(new Long(0));
+		pedidoEstoque.setValorTotal(new BigDecimal(0));
 		return repository.save(pedidoEstoque);
 	}
 
 	@Override
-	public PedidoEstoque update(PedidoEstoque pedidoEstoque) {
+	public PedidoEstoque update(PedidoEstoque pedidoEstoque) {		
 		return repository.save(pedidoEstoque);
 	}
 
