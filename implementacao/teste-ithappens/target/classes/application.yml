@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: api-ithappens
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    
+  datasource:
+  
+    url: jdbc:h2:file:~/h2db/ithappens
+    username: admin
+    password: admin
+    driver-class-name: org.h2.Driver
+    
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  h2:
+    console:
+      path: /h2
+      enabled: true
+      settings:
+        web-allow-others: true
+
+server:
+  port: 8080
